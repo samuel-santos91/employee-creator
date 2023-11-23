@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import EmployeeDisplay from "@/components/EmployeeDisplay";
-import { getEmployees } from "@/services/api";
+import { getEmployees, deleteEmployee } from "@/services/api";
 
 interface Employee {
   id: number;
@@ -16,13 +16,22 @@ interface Employee {
 export default function Employees() {
   const [employeesList, setEmployeesList] = useState<Employee[] | null>(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await getEmployees()
-        .then((res) => setEmployeesList(res))
-        .catch((e) => console.log(e));
-    };
+  const fetchData = async () => {
+    await getEmployees()
+      .then((res) => setEmployeesList(res))
+      .catch((e) => console.log(e));
+  };
 
+  const deleteDataHandler = async (id: number) => {
+    await deleteEmployee(id)
+      .then((res) => {
+        fetchData();
+        console.log(res);
+      })
+      .catch((e) => console.log(e));
+  };
+
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -36,6 +45,7 @@ export default function Employees() {
           lastName={employee.lastName}
           status={employee.status}
           email={employee.email}
+          onDelete={() => deleteDataHandler(employee.id)}
         />
       ))}
     </main>

@@ -1,33 +1,28 @@
-import { deleteEmployee } from "@/services/api";
-
 interface EmployeeDisplayProps {
   id: number;
   firstName: string;
   lastName: string;
   status: string;
   email: string;
+  onDelete: (id: number) => void;
 }
 
-const EmployeeDisplay: React.FC<EmployeeDisplayProps> = (data) => {
-  const deleteDataHandler = async (id: number) => {
-    await deleteEmployee(id)
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
-  };
+const EmployeeDisplay: React.FC<EmployeeDisplayProps> = (props) => {
+  const { id, firstName, lastName, status, email, onDelete } = props;
 
   return (
     <div className="bg-slate-200 m-3 p-3 rounded-md flex justify-between">
       <article>
-        <p>{data.firstName}</p>
-        <p>{data.lastName}</p>
-        <p>{data.status}</p>
-        <p>{data.email}</p>
+        <p>{firstName}</p>
+        <p>{lastName}</p>
+        <p>{status}</p>
+        <p>{email}</p>
       </article>
       <section>
         <button className="bg-white m-3 p-2 rounded-md">Edit</button>
         <button
           className="bg-white m-3 p-2 rounded-md"
-          onClick={() => deleteDataHandler(data.id)}
+          onClick={() => onDelete(id)}
         >
           Remove
         </button>
