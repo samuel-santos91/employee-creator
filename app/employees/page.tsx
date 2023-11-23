@@ -31,6 +31,7 @@ export default function Employees() {
       {employeesList?.map((employee) => (
         <EmployeeDisplay
           key={employee.id}
+          id={employee.id}
           firstName={employee.firstName}
           lastName={employee.lastName}
           status={employee.status}

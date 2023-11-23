@@ -7,9 +7,18 @@ const api = axios.create({
 export const getEmployees = async () => {
   try {
     const response = await api.get("/employees");
-    console.log(response.data)
+    console.log(response.data);
     return response.data;
   } catch (error) {
-    console.log(error);
+    throw error;
+  }
+};
+
+export const deleteEmployee = async (id: number): Promise<boolean> => {
+  try {
+    await api.delete(`/employees/${id}`);
+    return true;
+  } catch (error) {
+    throw error;
   }
 };
