@@ -36,7 +36,14 @@ export default function Employees() {
   }, []);
 
   return (
-    <main>
+    <>
+      <header className="h-40 bg-slate-400 flex">
+        <h1 className="m-auto">Employees' List</h1>
+      </header>
+      <section className="flex justify-center items-center my-10">
+        <p className="mr-4">Please click on 'Edit' to find more details of each employee</p>
+        <button className="bg-blue-700 p-3 rounded-lg text-white">Add Employee</button>
+      </section>
       {employeesList?.map((employee) => (
         <EmployeeDisplay
           key={employee.id}
@@ -48,6 +55,6 @@ export default function Employees() {
           onDelete={() => deleteDataHandler(employee.id)}
         />
       ))}
-    </main>
+    </>
   );
 }
