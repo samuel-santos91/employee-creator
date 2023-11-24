@@ -7,8 +7,16 @@ const api = axios.create({
 export const getEmployees = async () => {
   try {
     const response = await api.get("/employees");
-    console.log(response.data);
     return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const addEmployee = async (data: any) => {
+  try {
+    await api.post("/employees", data);
+    return true;
   } catch (error) {
     throw error;
   }

@@ -1,7 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
+
+import { addEmployee } from "@/services/api";
 
 interface Inputs {
   firstName: string;
@@ -19,13 +22,38 @@ interface Inputs {
   yearEnd: string;
   ongoing: string;
   type: string;
-  hours: string;
+  hoursPerWeek: string;
+}
+
+interface EmployeeData {
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address: string;
+  status: string;
+  startDate: string;
+  finishDate: string;
+  ongoing: string;
+  type: string;
+  hoursPerWeek: string;
 }
 
 export default function AddEmployee() {
+  const router = useRouter();
   const { register, handleSubmit } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const addData = async (data: EmployeeData) => {
+    await addEmployee(data)
+      .then((res) => {
+        console.log(res);
+        router.push("/employees");
+      })
+      .catch((e) => console.log(e));
+  };
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const {
       dayStart,
       monthStart,
@@ -35,17 +63,17 @@ export default function AddEmployee() {
       yearEnd,
       ...rest
     } = data;
-    const startDate = `${data.yearStart}/${data.monthStart.padStart(
+    const startDate = `${data.yearStart}-${data.monthStart.padStart(
       2,
       "0"
-    )}/${data.dayStart.padStart(2, "0")}`;
-    const finishDate = `${data.yearEnd}/${data.monthEnd.padStart(
+    )}-${data.dayStart.padStart(2, "0")}`;
+    const finishDate = `${data.yearEnd}-${data.monthEnd.padStart(
       2,
       "0"
-    )}/${data.dayEnd.padStart(2, "0")}`;
+    )}-${data.dayEnd.padStart(2, "0")}`;
 
     const newData = { startDate: startDate, finishDate: finishDate, ...rest };
-    console.log(newData)
+    await addData(newData);
   };
 
   return (
@@ -281,7 +309,7 @@ export default function AddEmployee() {
               className="h-8 w-56 border-2 border-black rounded-md"
               type="number"
               id="hours"
-              {...register("hours")}
+              {...register("hoursPerWeek")}
             />
           </div>
         </section>
