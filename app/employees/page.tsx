@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 import EmployeeDisplay from "@/components/EmployeeDisplay";
 import { getEmployees, deleteEmployee } from "@/services/api";
@@ -41,8 +42,14 @@ export default function Employees() {
         <h1 className="m-auto">Employees' List</h1>
       </header>
       <section className="flex justify-center items-center my-10">
-        <p className="mr-4">Please click on 'Edit' to find more details of each employee</p>
-        <button className="bg-blue-700 p-3 rounded-lg text-white">Add Employee</button>
+        <p className="mr-4">
+          Please click on 'Edit' to find more details of each employee
+        </p>
+        <Link href="/employees/add">
+          <button className="bg-blue-700 p-3 rounded-lg text-white">
+            Add Employee
+          </button>
+        </Link>
       </section>
       {employeesList?.map((employee) => (
         <EmployeeDisplay

@@ -1,6 +1,53 @@
+"use client";
+
 import Link from "next/link";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+interface Inputs {
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address: string;
+  status: string;
+  dayStart: string;
+  monthStart: string;
+  yearStart: string;
+  dayEnd: string;
+  monthEnd: string;
+  yearEnd: string;
+  ongoing: string;
+  type: string;
+  hours: string;
+}
 
 export default function AddEmployee() {
+  const { register, handleSubmit } = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    const {
+      dayStart,
+      monthStart,
+      yearStart,
+      dayEnd,
+      monthEnd,
+      yearEnd,
+      ...rest
+    } = data;
+    const startDate = `${data.yearStart}/${data.monthStart.padStart(
+      2,
+      "0"
+    )}/${data.dayStart.padStart(2, "0")}`;
+    const finishDate = `${data.yearEnd}/${data.monthEnd.padStart(
+      2,
+      "0"
+    )}/${data.dayEnd.padStart(2, "0")}`;
+
+    const newData = { startDate: startDate, finishDate: finishDate, ...rest };
+    console.log(newData)
+  };
+
   return (
     <>
       <header className="h-40 bg-slate-400 flex">
@@ -10,33 +57,36 @@ export default function AddEmployee() {
         <h1 className="m-auto">Employee Details</h1>
       </header>
 
-      <form className="px-20">
+      <form className="px-20" onSubmit={handleSubmit(onSubmit)}>
         <section>
           <h2 className="my-3 text-2xl">Personal Information</h2>
           <div className="flex flex-col">
-            <label htmlFor="firstname">First Name</label>
+            <label htmlFor="firstName">First Name</label>
             <input
               className="h-8 w-56 border-2 border-black rounded-md"
               type="text"
-              id="firstname"
+              id="firstName"
+              {...register("firstName")}
             />
           </div>
 
           <div className="flex flex-col">
-            <label htmlFor="midlename">Midle Name(If applicable)</label>
+            <label htmlFor="middleName">Middle Name(If applicable)</label>
             <input
               className="h-8 w-56 border-2 border-black rounded-md"
               type="text"
-              id="midlename"
+              id="middleName"
+              {...register("middleName")}
             />
           </div>
 
           <div className="flex flex-col">
-            <label htmlFor="lastname">Last Name</label>
+            <label htmlFor="lastName">Last Name</label>
             <input
               className="h-8 w-56 border-2 border-black rounded-md"
               type="text"
-              id="lastname"
+              id="lastName"
+              {...register("lastName")}
             />
           </div>
         </section>
@@ -49,6 +99,7 @@ export default function AddEmployee() {
               className="h-8 w-56 border-2 border-black rounded-md"
               type="email"
               id="email"
+              {...register("email")}
             />
           </div>
 
@@ -56,8 +107,9 @@ export default function AddEmployee() {
             <label htmlFor="phone">Mobile Number</label>
             <input
               className="h-8 w-56 border-2 border-black rounded-md"
-              type="number"
+              type="text"
               id="phone"
+              {...register("phone")}
             />
           </div>
 
@@ -67,6 +119,7 @@ export default function AddEmployee() {
               className="h-8 w-56 border-2 border-black rounded-md"
               type="text"
               id="address"
+              {...register("address")}
             />
           </div>
         </section>
@@ -77,9 +130,9 @@ export default function AddEmployee() {
             <div>
               <input
                 type="radio"
-                name="status"
                 value="permanent"
                 id="permanent"
+                {...register("status")}
               />
               <label htmlFor="permanent">Permanent</label>
             </div>
@@ -87,9 +140,9 @@ export default function AddEmployee() {
             <div>
               <input
                 type="radio"
-                name="status"
                 value="contract"
                 id="contract"
+                {...register("status")}
               />
               <label htmlFor="contract">Contract</label>
             </div>
@@ -98,20 +151,21 @@ export default function AddEmployee() {
           <p className="font-bold mt-2">Start Date</p>
           <section className="flex">
             <div className="mr-2 flex flex-col">
-              <label htmlFor="daystart">Day</label>
+              <label htmlFor="dayStart">Day</label>
               <input
                 className="h-8 w-16 border-2 border-black rounded-md"
-                type="text"
-                id="daystart"
+                type="number"
+                id="dayStart"
+                {...register("dayStart")}
               />
             </div>
 
             <div className="mr-2 flex flex-col">
-              <label htmlFor="monthstart">Month</label>
+              <label htmlFor="monthStart">Month</label>
               <select
                 className="h-8 w-36 border-2 border-black rounded-md"
-                name="months"
-                id="monthstart"
+                id="monthStart"
+                {...register("monthStart")}
               >
                 <option value="1">January</option>
                 <option value="2">February</option>
@@ -129,11 +183,12 @@ export default function AddEmployee() {
             </div>
 
             <div className="flex flex-col">
-              <label htmlFor="yearstart">Year</label>
+              <label htmlFor="yearStart">Year</label>
               <input
                 className="h-8 w-16 border-2 border-black rounded-md"
-                type="text"
-                id="yearstart"
+                type="number"
+                id="yearStart"
+                {...register("yearStart")}
               />
             </div>
           </section>
@@ -141,20 +196,21 @@ export default function AddEmployee() {
           <p className="font-bold mt-2">Finish Date</p>
           <section className="flex">
             <div className="mr-2 flex flex-col">
-              <label htmlFor="dayend">Day</label>
+              <label htmlFor="dayEnd">Day</label>
               <input
                 className="h-8 w-16 border-2 border-black rounded-md"
-                type="text"
-                id="dayend"
+                type="number"
+                id="dayEnd"
+                {...register("dayEnd")}
               />
             </div>
 
             <div className="mr-2 flex flex-col">
-              <label htmlFor="monthend">Month</label>
+              <label htmlFor="monthEnd">Month</label>
               <select
                 className="h-8 w-36 border-2 border-black rounded-md"
-                name="months"
-                id="monthend"
+                id="monthEnd"
+                {...register("monthEnd")}
               >
                 <option value="1">January</option>
                 <option value="2">February</option>
@@ -172,11 +228,12 @@ export default function AddEmployee() {
             </div>
 
             <div className="flex flex-col">
-              <label htmlFor="yearend">Year</label>
+              <label htmlFor="yearEnd">Year</label>
               <input
                 className="h-8 w-16 border-2 border-black rounded-md"
-                type="text"
-                id="yearend"
+                type="number"
+                id="yearEnd"
+                {...register("yearEnd")}
               />
             </div>
           </section>
@@ -184,11 +241,13 @@ export default function AddEmployee() {
           <div className="my-2">
             <input
               type="checkbox"
-              name="ongoing"
               value="ongoing"
               id="ongoing"
+              {...register("ongoing")}
             />
-            <label className="mx-2" htmlFor="ongoing">On going</label>
+            <label className="mx-2" htmlFor="ongoing">
+              On going
+            </label>
           </div>
 
           <div className="flex flex-col">
@@ -196,24 +255,42 @@ export default function AddEmployee() {
             <div>
               <input
                 type="radio"
-                name="type"
                 value="fulltime"
-                id="fulltime"
+                id="fullTime"
+                {...register("type")}
               />
-              <label htmlFor="fulltime">Full-time</label>
+              <label htmlFor="fullTime">Full-time</label>
             </div>
 
             <div>
               <input
                 type="radio"
-                name="type"
                 value="parttime"
-                id="parttime"
+                id="partTime"
+                {...register("type")}
               />
-              <label htmlFor="parttime">Part-time</label>
+              <label htmlFor="partTime">Part-time</label>
             </div>
           </div>
 
+          <div className="flex flex-col">
+            <label className="font-bold mt-2" htmlFor="hours">
+              Hours Per Week
+            </label>
+            <input
+              className="h-8 w-56 border-2 border-black rounded-md"
+              type="number"
+              id="hours"
+              {...register("hours")}
+            />
+          </div>
+        </section>
+
+        <section className="flex justify-center">
+          <button className="m-2 p-3 w-28 bg-blue-600 text-white">Save</button>
+          <Link href="/employees">
+            <button className="m-2 p-3 w-28 bg-slate-300">Cancel</button>
+          </Link>
         </section>
       </form>
     </>
