@@ -63,14 +63,14 @@ export default function AddEmployee() {
       yearEnd,
       ...rest
     } = data;
-    const startDate = `${data.yearStart}-${data.monthStart.padStart(
+
+    const startDate = `${data.yearStart}-${
+      data.monthStart
+    }-${data.dayStart.padStart(2, "0")}`;
+    const finishDate = `${data.yearEnd}-${data.monthEnd}-${data.dayEnd.padStart(
       2,
       "0"
-    )}-${data.dayStart.padStart(2, "0")}`;
-    const finishDate = `${data.yearEnd}-${data.monthEnd.padStart(
-      2,
-      "0"
-    )}-${data.dayEnd.padStart(2, "0")}`;
+    )}`;
 
     const newData = { startDate: startDate, finishDate: finishDate, ...rest };
     await addData(newData);
@@ -195,15 +195,15 @@ export default function AddEmployee() {
                 id="monthStart"
                 {...register("monthStart")}
               >
-                <option value="1">January</option>
-                <option value="2">February</option>
-                <option value="3">March</option>
-                <option value="4">April</option>
-                <option value="5">May</option>
-                <option value="6">June</option>
-                <option value="7">July</option>
-                <option value="8">August</option>
-                <option value="9">September</option>
+                <option value="01">January</option>
+                <option value="02">February</option>
+                <option value="03">March</option>
+                <option value="04">April</option>
+                <option value="05">May</option>
+                <option value="06">June</option>
+                <option value="07">July</option>
+                <option value="08">August</option>
+                <option value="09">September</option>
                 <option value="10">October</option>
                 <option value="11">November</option>
                 <option value="12">December</option>
@@ -240,15 +240,15 @@ export default function AddEmployee() {
                 id="monthEnd"
                 {...register("monthEnd")}
               >
-                <option value="1">January</option>
-                <option value="2">February</option>
-                <option value="3">March</option>
-                <option value="4">April</option>
-                <option value="5">May</option>
-                <option value="6">June</option>
-                <option value="7">July</option>
-                <option value="8">August</option>
-                <option value="9">September</option>
+                <option value="01">January</option>
+                <option value="02">February</option>
+                <option value="03">March</option>
+                <option value="04">April</option>
+                <option value="05">May</option>
+                <option value="06">June</option>
+                <option value="07">July</option>
+                <option value="08">August</option>
+                <option value="09">September</option>
                 <option value="10">October</option>
                 <option value="11">November</option>
                 <option value="12">December</option>
@@ -283,7 +283,7 @@ export default function AddEmployee() {
             <div>
               <input
                 type="radio"
-                value="fulltime"
+                value="full-time"
                 id="fullTime"
                 {...register("type")}
               />
@@ -293,7 +293,7 @@ export default function AddEmployee() {
             <div>
               <input
                 type="radio"
-                value="parttime"
+                value="part-time"
                 id="partTime"
                 {...register("type")}
               />
