@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 import { getEmployeeById } from "@/services/api";
+import { editEmployeeDetails } from "@/services/api";
 
 interface Inputs {
   firstName: string;
@@ -41,13 +42,15 @@ interface EmployeeData {
 }
 
 export default function EmployeeId({ params }: any) {
-  const { register, setValue } = useForm<Inputs>();
+  const { register, setValue, handleSubmit } = useForm<Inputs>();
 
   const fetchData = async () => {
     await getEmployeeById(params.id)
       .then((res) => {
         Object.keys(res).forEach((key) => {
-          setValue(key as keyof Inputs, res[key]);
+          if (key !== "startDate" && key !== "finishDate") {
+            setValue(key as keyof Inputs, res[key]);
+          }
         });
 
         const startDateComponents = res.startDate.split("T")[0].split("-");
@@ -67,6 +70,38 @@ export default function EmployeeId({ params }: any) {
     fetchData();
   }, []);
 
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    console.log(data)
+
+    const {
+      dayStart,
+      monthStart,
+      yearStart,
+      dayEnd,
+      monthEnd,
+      yearEnd,
+      ...rest
+    } = data;
+
+    const startDate = `${data.yearStart}-${
+      data.monthStart
+    }-${data.dayStart.padStart(2, "0")}`;
+    const finishDate = `${data.yearEnd}-${data.monthEnd}-${data.dayEnd.padStart(
+      2,
+      "0"
+    )}`;
+
+    const newData = { startDate: startDate, finishDate: finishDate, ...rest };
+
+    try {
+      await editEmployeeDetails(params.id, newData).then((res) =>
+        console.log(res)
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <header className="h-40 bg-slate-400 flex">
@@ -76,7 +111,7 @@ export default function EmployeeId({ params }: any) {
         <h1 className="m-auto">Employee Details</h1>
       </header>
 
-      <form className="px-20">
+      <form className="px-20" onSubmit={handleSubmit(onSubmit)}>
         <section>
           <h2 className="my-3 text-2xl">Personal Information</h2>
           <div className="flex flex-col">

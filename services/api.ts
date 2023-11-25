@@ -31,6 +31,15 @@ export const addEmployee = async (data: any) => {
   }
 };
 
+export const editEmployeeDetails = async (id: number, data: any) => {
+  try {
+    await api.patch(`/employees/${id}`, data);
+    return true;
+  } catch (error) {
+    throw new Error("Employee Not Found");
+  }
+};
+
 export const deleteEmployee = async (id: number): Promise<boolean> => {
   try {
     await api.delete(`/employees/${id}`);
