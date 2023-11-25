@@ -13,6 +13,15 @@ export const getEmployees = async () => {
   }
 };
 
+export const getEmployeeById = async (id: number) => {
+  try {
+    const response = await api.get(`/employees/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const addEmployee = async (data: any) => {
   try {
     await api.post("/employees", data);

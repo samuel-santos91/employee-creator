@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 interface EmployeeDisplayProps {
   id: number;
   firstName: string;
@@ -9,6 +10,7 @@ interface EmployeeDisplayProps {
 
 const EmployeeDisplay: React.FC<EmployeeDisplayProps> = (props) => {
   const { id, firstName, lastName, status, email, onDelete } = props;
+  const router = useRouter();
 
   return (
     <div className="bg-slate-200 m-3 p-3 rounded-md flex justify-between">
@@ -19,7 +21,12 @@ const EmployeeDisplay: React.FC<EmployeeDisplayProps> = (props) => {
         <p>{email}</p>
       </article>
       <section>
-        <button className="bg-white m-3 p-2 rounded-md">Edit</button>
+        <button
+          className="bg-white m-3 p-2 rounded-md"
+          onClick={() => router.push(`employees/${id}`)}
+        >
+          Edit
+        </button>
         <button
           className="bg-white m-3 p-2 rounded-md"
           onClick={() => onDelete(id)}
