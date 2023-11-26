@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import { addEmployee } from "@/services/api";
-import { refactorData } from "@/services/data";
+import { joinDate } from "@/services/refactor";
 import EmployeeForm from "@/components/EmployeeForm";
 
 interface Inputs {
@@ -55,7 +55,7 @@ export default function AddEmployee() {
   };
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const employeeData = refactorData(data);
+    const employeeData = joinDate(data);
     await addData(employeeData);
   };
 

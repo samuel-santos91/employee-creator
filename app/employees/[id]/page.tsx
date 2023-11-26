@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { getEmployeeById } from "@/services/api";
 import { editEmployeeDetails } from "@/services/api";
-import { refactorData } from "@/services/data";
+import { joinDate, spreadDate } from "@/services/refactor";
 import EmployeeForm from "@/components/EmployeeForm";
 
 interface Inputs {
@@ -50,21 +50,7 @@ export default function EmployeeId({ params }: any) {
   const fetchData = async () => {
     await getEmployeeById(params.id)
       .then((res) => {
-        Object.keys(res).forEach((key) => {
-          if (key !== "startDate" && key !== "finishDate") {
-            setValue(key as keyof Inputs, res[key as keyof EmployeeData]);
-          }
-        });
-
-        const startDateComponents = res.startDate.split("T")[0].split("-");
-        setValue("yearStart", startDateComponents[0]);
-        setValue("monthStart", startDateComponents[1]);
-        setValue("dayStart", startDateComponents[2]);
-
-        const finishDateComponents = res.finishDate.split("T")[0].split("-");
-        setValue("yearEnd", finishDateComponents[0]);
-        setValue("monthEnd", finishDateComponents[1]);
-        setValue("dayEnd", finishDateComponents[2]);
+        spreadDate(res, setValue);
       })
       .catch((e) => console.log(e));
   };
@@ -74,7 +60,7 @@ export default function EmployeeId({ params }: any) {
   }, []);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const employeeData = refactorData(data);
+    const employeeData = joinDate(data);
 
     try {
       await editEmployeeDetails(params.id, employeeData).then((res) => {
