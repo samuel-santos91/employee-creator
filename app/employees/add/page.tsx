@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import { addEmployee } from "@/services/api";
+import { refactorData } from "@/services/data";
 import EmployeeForm from "@/components/EmployeeForm";
 
 interface Inputs {
@@ -54,26 +55,8 @@ export default function AddEmployee() {
   };
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const {
-      dayStart,
-      monthStart,
-      yearStart,
-      dayEnd,
-      monthEnd,
-      yearEnd,
-      ...rest
-    } = data;
-
-    const startDate = `${data.yearStart}-${
-      data.monthStart
-    }-${data.dayStart.padStart(2, "0")}`;
-    const finishDate = `${data.yearEnd}-${data.monthEnd}-${data.dayEnd.padStart(
-      2,
-      "0"
-    )}`;
-
-    const newData = { startDate: startDate, finishDate: finishDate, ...rest };
-    await addData(newData);
+    const employeeData = refactorData(data);
+    await addData(employeeData);
   };
 
   return (

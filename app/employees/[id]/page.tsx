@@ -2,9 +2,11 @@
 
 import { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 import { getEmployeeById } from "@/services/api";
 import { editEmployeeDetails } from "@/services/api";
+import { refactorData } from "@/services/data";
 import EmployeeForm from "@/components/EmployeeForm";
 
 interface Inputs {
@@ -43,13 +45,14 @@ interface EmployeeData {
 
 export default function EmployeeId({ params }: any) {
   const { register, setValue, handleSubmit } = useForm<Inputs>();
+  const router = useRouter();
 
   const fetchData = async () => {
     await getEmployeeById(params.id)
       .then((res) => {
         Object.keys(res).forEach((key) => {
           if (key !== "startDate" && key !== "finishDate") {
-            setValue(key as keyof Inputs, res[key]);
+            setValue(key as keyof Inputs, res[key as keyof EmployeeData]);
           }
         });
 
@@ -71,32 +74,13 @@ export default function EmployeeId({ params }: any) {
   }, []);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    console.log(data);
-
-    const {
-      dayStart,
-      monthStart,
-      yearStart,
-      dayEnd,
-      monthEnd,
-      yearEnd,
-      ...rest
-    } = data;
-
-    const startDate = `${data.yearStart}-${
-      data.monthStart
-    }-${data.dayStart.padStart(2, "0")}`;
-    const finishDate = `${data.yearEnd}-${data.monthEnd}-${data.dayEnd.padStart(
-      2,
-      "0"
-    )}`;
-
-    const newData = { startDate: startDate, finishDate: finishDate, ...rest };
+    const employeeData = refactorData(data);
 
     try {
-      await editEmployeeDetails(params.id, newData).then((res) =>
-        console.log(res)
-      );
+      await editEmployeeDetails(params.id, employeeData).then((res) => {
+        console.log(res);
+        router.push("/employees");
+      });
     } catch (error) {
       console.log(error);
     }
