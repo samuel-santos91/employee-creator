@@ -9,23 +9,23 @@ interface EmployeeFormProps {
 }
 
 interface Inputs {
-    firstName: string;
-    middleName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-    address: string;
-    status: string;
-    dayStart: string;
-    monthStart: string;
-    yearStart: string;
-    dayEnd: string;
-    monthEnd: string;
-    yearEnd: string;
-    ongoing: string;
-    type: string;
-    hoursPerWeek: string;
-  }
+  firstName: string;
+  middleName?: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address?: string;
+  status: string;
+  dayStart: string;
+  monthStart: string;
+  yearStart: string;
+  dayEnd: string;
+  monthEnd: string;
+  yearEnd: string;
+  ongoing?: string;
+  type: string;
+  hoursPerWeek?: string;
+}
 
 const EmployeeForm: React.FC<EmployeeFormProps> = ({
   register,
@@ -151,6 +151,7 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
                 id="monthStart"
                 {...register("monthStart")}
               >
+                <option value="">Select Month</option>
                 <option value="01">January</option>
                 <option value="02">February</option>
                 <option value="03">March</option>
@@ -196,6 +197,7 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
                 id="monthEnd"
                 {...register("monthEnd")}
               >
+                <option value="">Select Month</option>
                 <option value="01">January</option>
                 <option value="02">February</option>
                 <option value="03">March</option>

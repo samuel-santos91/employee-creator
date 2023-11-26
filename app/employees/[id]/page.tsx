@@ -10,38 +10,23 @@ import { joinDate, spreadDate } from "@/services/refactor";
 import EmployeeForm from "@/components/EmployeeForm";
 
 interface Inputs {
-  firstName: string;
-  middleName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  address: string;
-  status: string;
-  dayStart: string;
-  monthStart: string;
-  yearStart: string;
-  dayEnd: string;
-  monthEnd: string;
-  yearEnd: string;
-  ongoing: string;
-  type: string;
-  hoursPerWeek: string;
-}
-
-interface EmployeeData {
-  firstName: string;
-  middleName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  address: string;
-  status: string;
-  startDate: string;
-  finishDate: string;
-  ongoing: string;
-  type: string;
-  hoursPerWeek: string;
-}
+    firstName: string;
+    middleName?: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    address?: string;
+    status: string;
+    dayStart: string;
+    monthStart: string;
+    yearStart: string;
+    dayEnd: string;
+    monthEnd: string;
+    yearEnd: string;
+    ongoing?: string;
+    type: string;
+    hoursPerWeek?: string;
+  }
 
 export default function EmployeeId({ params }: any) {
   const { register, setValue, handleSubmit } = useForm<Inputs>();

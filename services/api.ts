@@ -9,17 +9,17 @@ interface EmployeeDataMain {
 }
 interface EmployeeData {
   firstName: string;
-  middleName: string;
+  middleName?: string;
   lastName: string;
   email: string;
   phone: string;
-  address: string;
+  address?: string;
   status: string;
   startDate: string;
   finishDate: string;
-  ongoing: string;
+  ongoing?: string;
   type: string;
-  hoursPerWeek: string;
+  hoursPerWeek?: string;
 }
 
 const api = axios.create({

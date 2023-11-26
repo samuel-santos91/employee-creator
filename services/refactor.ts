@@ -2,11 +2,11 @@ import { UseFormSetValue } from "react-hook-form";
 
 interface InputData {
   firstName: string;
-  middleName: string;
+  middleName?: string;
   lastName: string;
   email: string;
   phone: string;
-  address: string;
+  address?: string;
   status: string;
   dayStart: string;
   monthStart: string;
@@ -14,24 +14,24 @@ interface InputData {
   dayEnd: string;
   monthEnd: string;
   yearEnd: string;
-  ongoing: string;
+  ongoing?: string;
   type: string;
-  hoursPerWeek: string;
+  hoursPerWeek?: string;
 }
 
 interface EmployeeData {
   firstName: string;
-  middleName: string;
+  middleName?: string;
   lastName: string;
   email: string;
   phone: string;
-  address: string;
+  address?: string;
   status: string;
   startDate: string;
   finishDate: string;
-  ongoing: string;
+  ongoing?: string;
   type: string;
-  hoursPerWeek: string;
+  hoursPerWeek?: string;
 }
 
 export const joinDate = (data: InputData): EmployeeData => {

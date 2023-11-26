@@ -2,18 +2,20 @@
 
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import { addEmployee } from "@/services/api";
 import { joinDate } from "@/services/refactor";
+import { schema } from "@/services/yupValidation";
 import EmployeeForm from "@/components/EmployeeForm";
 
 interface Inputs {
   firstName: string;
-  middleName: string;
+  middleName?: string;
   lastName: string;
   email: string;
   phone: string;
-  address: string;
+  address?: string;
   status: string;
   dayStart: string;
   monthStart: string;
@@ -21,29 +23,35 @@ interface Inputs {
   dayEnd: string;
   monthEnd: string;
   yearEnd: string;
-  ongoing: string;
+  ongoing?: string;
   type: string;
-  hoursPerWeek: string;
+  hoursPerWeek?: string;
 }
 
 interface EmployeeData {
   firstName: string;
-  middleName: string;
+  middleName?: string;
   lastName: string;
   email: string;
   phone: string;
-  address: string;
+  address?: string;
   status: string;
   startDate: string;
   finishDate: string;
-  ongoing: string;
+  ongoing?: string;
   type: string;
-  hoursPerWeek: string;
+  hoursPerWeek?: string;
 }
 
 export default function AddEmployee() {
   const router = useRouter();
-  const { register, handleSubmit } = useForm<Inputs>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>({
+    resolver: yupResolver(schema),
+  });
 
   const addData = async (data: EmployeeData) => {
     await addEmployee(data)
@@ -58,6 +66,8 @@ export default function AddEmployee() {
     const employeeData = joinDate(data);
     await addData(employeeData);
   };
+
+  console.log(errors)
 
   return (
     <EmployeeForm
