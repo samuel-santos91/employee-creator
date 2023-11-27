@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -23,7 +24,7 @@ interface Inputs {
   dayEnd: string;
   monthEnd: string;
   yearEnd: string;
-  ongoing?: string;
+  ongoing?: boolean;
   type: string;
   hoursPerWeek?: string;
 }
@@ -37,8 +38,8 @@ interface EmployeeData {
   address?: string;
   status: string;
   startDate: string;
-  finishDate: string;
-  ongoing?: string;
+  finishDate?: string;
+  ongoing?: boolean;
   type: string;
   hoursPerWeek?: string;
 }
@@ -47,9 +48,11 @@ export default function AddEmployee() {
   const router = useRouter();
   const {
     register,
+    setValue,
+    watch,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>({
+  } = useForm<Inputs | any>({
     resolver: yupResolver(schema),
   });
 
@@ -64,10 +67,21 @@ export default function AddEmployee() {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const employeeData = joinDate(data);
+    console.log(employeeData)
     await addData(employeeData);
   };
 
-  console.log(errors)
+  const isOngoing = watch("ongoing");
+
+  useEffect(() => {
+    if (isOngoing) {
+      setValue("dayEnd", "");
+      setValue("monthEnd", "");
+      setValue("yearEnd", "");
+    }
+  }, [isOngoing, setValue]);
+
+  console.log(errors);
 
   return (
     <EmployeeForm

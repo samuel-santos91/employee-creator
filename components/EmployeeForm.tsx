@@ -22,7 +22,7 @@ interface Inputs {
   dayEnd: string;
   monthEnd: string;
   yearEnd: string;
-  ongoing?: string;
+  ongoing?: boolean;
   type: string;
   hoursPerWeek?: string;
 }
@@ -227,7 +227,6 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
           <div className="my-2">
             <input
               type="checkbox"
-              value="ongoing"
               id="ongoing"
               {...register("ongoing")}
             />

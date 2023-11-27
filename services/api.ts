@@ -16,8 +16,8 @@ interface EmployeeData {
   address?: string;
   status: string;
   startDate: string;
-  finishDate: string;
-  ongoing?: string;
+  finishDate?: string;
+  ongoing?: boolean;
   type: string;
   hoursPerWeek?: string;
 }

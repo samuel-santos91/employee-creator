@@ -14,7 +14,7 @@ interface InputData {
   dayEnd: string;
   monthEnd: string;
   yearEnd: string;
-  ongoing?: string;
+  ongoing?: boolean;
   type: string;
   hoursPerWeek?: string;
 }
@@ -29,7 +29,7 @@ interface EmployeeData {
   status: string;
   startDate: string;
   finishDate: string;
-  ongoing?: string;
+  ongoing?: boolean;
   type: string;
   hoursPerWeek?: string;
 }
@@ -48,13 +48,19 @@ export const joinDate = (data: InputData): EmployeeData => {
   const startDate = `${data.yearStart}-${
     data.monthStart
   }-${data.dayStart.padStart(2, "0")}`;
-  const finishDate = `${data.yearEnd}-${data.monthEnd}-${data.dayEnd.padStart(
-    2,
-    "0"
-  )}`;
 
-  const newData = { startDate: startDate, finishDate: finishDate, ...rest };
-  return newData;
+  if (dayEnd === "" && monthEnd === "" && yearEnd === "") {
+    const finishDate = "";
+    const newData = { startDate: startDate, finishDate: finishDate, ...rest };
+    return newData;
+  } else {
+    const finishDate = `${data.yearEnd}-${data.monthEnd}-${data.dayEnd.padStart(
+      2,
+      "0"
+    )}`;
+    const newData = { startDate: startDate, finishDate: finishDate, ...rest };
+    return newData;
+  }
 };
 
 export const spreadDate = (

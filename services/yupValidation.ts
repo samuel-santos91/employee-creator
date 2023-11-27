@@ -24,6 +24,8 @@ export const schema = yup.object({
 
   status: yup.string().required(),
 
+  ongoing: yup.boolean(),
+
   dayStart: yup.string().required("Please enter the start day"),
   monthStart: yup.string().required("Please enter the start month"),
   yearStart: yup
@@ -31,22 +33,36 @@ export const schema = yup.object({
     .required("Please enter the start year")
     .matches(/^\d+$/, "Year must be a valid number"),
 
-  dayEnd: yup.string().required("Please enter the finish day"),
-  monthEnd: yup.string().required("Please enter the finish month"),
-  yearEnd: yup
-    .string()
-    .required("Please enter the finish year")
-    .test(
-      "is-after-start-date",
-      "Finish date must be after start date",
-      function (value) {
-        const { dayStart, monthStart, yearStart, dayEnd, monthEnd } =
-          this.parent;
-        const startDate = new Date(`${yearStart}-${monthStart}-${dayStart}`);
-        const finishDate = new Date(`${value}-${monthEnd}-${dayEnd}`);
-        return finishDate > startDate;
-      }
-    ),
+  dayEnd: yup.string().when("ongoing", {
+    is: false,
+    then: () => yup.string().required("Please enter the finish day"),
+  }),
+  monthEnd: yup.string().when("ongoing", {
+    is: false,
+    then: () => yup.string().required("Please enter the finish month"),
+  }),
+  yearEnd: yup.string().when("ongoing", {
+    is: false,
+    then: () =>
+      yup
+        .string()
+        .required("Please enter the finish year")
+        .test(
+          "is-after-start-date",
+          "Finish date must be after start date",
+          function (value) {
+            const { dayStart, monthStart, yearStart, dayEnd, monthEnd } =
+              this.parent;
+            const startDate = new Date(
+              `${yearStart}-${monthStart}-${dayStart}`
+            );
+            const finishDate = new Date(`${value}-${monthEnd}-${dayEnd}`);
+            return finishDate > startDate;
+          }
+        ),
+  }),
 
   type: yup.string().required("Select one option"),
+
+  hoursPerWeek: yup.string(),
 });

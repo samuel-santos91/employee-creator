@@ -23,7 +23,7 @@ interface Inputs {
     dayEnd: string;
     monthEnd: string;
     yearEnd: string;
-    ongoing?: string;
+    ongoing?: boolean;
     type: string;
     hoursPerWeek?: string;
   }
