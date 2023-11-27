@@ -6,6 +6,8 @@ interface EmployeeDataMain {
   lastName: string;
   status: string;
   email: string;
+  startDate: string;
+  finishDate: string;
 }
 interface EmployeeData {
   firstName: string;

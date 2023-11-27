@@ -12,6 +12,7 @@ interface Employee {
   lastName: string;
   status: string;
   email: string;
+  startDate: string;
 }
 
 export default function Employees() {
@@ -19,7 +20,9 @@ export default function Employees() {
 
   const fetchData = async () => {
     await getEmployees()
-      .then((res) => setEmployeesList(res))
+      .then((res) => {
+        setEmployeesList(res);
+      })
       .catch((e) => console.log(e));
   };
 
@@ -59,6 +62,7 @@ export default function Employees() {
           lastName={employee.lastName}
           status={employee.status}
           email={employee.email}
+          startDate={employee.startDate}
           onDelete={() => deleteDataHandler(employee.id)}
         />
       ))}
