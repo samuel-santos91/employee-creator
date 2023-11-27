@@ -28,7 +28,7 @@ interface EmployeeData {
   address?: string;
   status: string;
   startDate: string;
-  finishDate: string;
+  finishDate?: string;
   ongoing?: boolean;
   type: string;
   hoursPerWeek?: string;
@@ -78,8 +78,14 @@ export const spreadDate = (
   setValue("monthStart", startDateComponents[1]);
   setValue("dayStart", startDateComponents[2]);
 
-  const finishDateComponents = res.finishDate.split("T")[0].split("-");
-  setValue("yearEnd", finishDateComponents[0]);
-  setValue("monthEnd", finishDateComponents[1]);
-  setValue("dayEnd", finishDateComponents[2]);
+  if (res.finishDate) {
+    const finishDateComponents = res.finishDate.split("T")[0].split("-");
+    setValue("yearEnd", finishDateComponents[0]);
+    setValue("monthEnd", finishDateComponents[1]);
+    setValue("dayEnd", finishDateComponents[2]);
+  } else {
+    setValue("yearEnd", "");
+    setValue("monthEnd", "");
+    setValue("dayEnd", "");
+  }
 };

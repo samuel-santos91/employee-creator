@@ -1,7 +1,6 @@
 import { useRouter } from "next/navigation";
 
 import { timePeriod } from "@/services/timePeriod";
-import { time } from "console";
 interface EmployeeDisplayProps {
   id: number;
   firstName: string;

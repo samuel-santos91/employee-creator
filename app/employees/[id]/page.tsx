@@ -3,33 +3,41 @@
 import { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import { getEmployeeById } from "@/services/api";
 import { editEmployeeDetails } from "@/services/api";
 import { joinDate, spreadDate } from "@/services/refactor";
+import { schema } from "@/services/yupValidation";
 import EmployeeForm from "@/components/EmployeeForm";
 
 interface Inputs {
-    firstName: string;
-    middleName?: string;
-    lastName: string;
-    email: string;
-    phone: string;
-    address?: string;
-    status: string;
-    dayStart: string;
-    monthStart: string;
-    yearStart: string;
-    dayEnd: string;
-    monthEnd: string;
-    yearEnd: string;
-    ongoing?: boolean;
-    type: string;
-    hoursPerWeek?: string;
-  }
+  firstName: string;
+  middleName?: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address?: string;
+  status: string;
+  dayStart: string;
+  monthStart: string;
+  yearStart: string;
+  dayEnd: string;
+  monthEnd: string;
+  yearEnd: string;
+  ongoing?: boolean;
+  type: string;
+  hoursPerWeek?: string;
+}
 
 export default function EmployeeId({ params }: any) {
-  const { register, setValue, handleSubmit } = useForm<Inputs>();
+  const {
+    register,
+    setValue,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs | any>({ resolver: yupResolver(schema) });
   const router = useRouter();
 
   const fetchData = async () => {
@@ -62,6 +70,9 @@ export default function EmployeeId({ params }: any) {
       register={register}
       onSubmit={onSubmit}
       handleSubmit={handleSubmit}
+      setValue={setValue}
+      watch={watch}
+      errors={errors}
     />
   );
 }

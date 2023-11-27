@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -67,27 +66,17 @@ export default function AddEmployee() {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const employeeData = joinDate(data);
-    console.log(employeeData)
     await addData(employeeData);
   };
-
-  const isOngoing = watch("ongoing");
-
-  useEffect(() => {
-    if (isOngoing) {
-      setValue("dayEnd", "");
-      setValue("monthEnd", "");
-      setValue("yearEnd", "");
-    }
-  }, [isOngoing, setValue]);
-
-  console.log(errors);
 
   return (
     <EmployeeForm
       register={register}
       onSubmit={onSubmit}
       handleSubmit={handleSubmit}
+      setValue={setValue}
+      watch={watch}
+      errors={errors}
     />
   );
 }

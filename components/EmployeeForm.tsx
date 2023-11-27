@@ -1,11 +1,22 @@
 import Link from "next/link";
+import { useEffect } from "react";
 
-import { SubmitHandler, UseFormRegister, UseFormHandleSubmit } from "react-hook-form";
+import {
+  SubmitHandler,
+  UseFormRegister,
+  UseFormHandleSubmit,
+  UseFormSetValue,
+  UseFormWatch,
+  FieldErrors
+} from "react-hook-form";
 
 interface EmployeeFormProps {
   onSubmit: SubmitHandler<Inputs>;
   register: UseFormRegister<Inputs>;
-  handleSubmit: UseFormHandleSubmit<Inputs>
+  handleSubmit: UseFormHandleSubmit<Inputs>;
+  setValue: UseFormSetValue<Inputs>;
+  watch: UseFormWatch<Inputs>;
+  errors: FieldErrors<Inputs>;
 }
 
 interface Inputs {
@@ -31,7 +42,23 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
   register,
   handleSubmit,
   onSubmit,
+  setValue,
+  watch,
+  errors,
 }) => {
+
+  const isOngoing = watch("ongoing");
+
+  useEffect(() => {
+    if (isOngoing) {
+      setValue("dayEnd", "");
+      setValue("monthEnd", "");
+      setValue("yearEnd", "");
+    }
+  }, [isOngoing, setValue]);
+
+  console.log(errors)
+
   return (
     <>
       <header className="h-40 bg-slate-400 flex">
@@ -225,11 +252,7 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
           </section>
 
           <div className="my-2">
-            <input
-              type="checkbox"
-              id="ongoing"
-              {...register("ongoing")}
-            />
+            <input type="checkbox" id="ongoing" {...register("ongoing")} />
             <label className="mx-2" htmlFor="ongoing">
               On going
             </label>
