@@ -22,7 +22,7 @@ export const schema = yup.object({
 
   address: yup.string(),
 
-  status: yup.string().required(),
+  status: yup.string().required("Select one option"),
 
   ongoing: yup.boolean(),
 
@@ -31,7 +31,7 @@ export const schema = yup.object({
   yearStart: yup
     .string()
     .required("Please enter the start year")
-    .matches(/^\d+$/, "Year must be a valid number"),
+    .matches(/^\d{4}$/, "Year must be a valid number"),
 
   dayEnd: yup.string().when("ongoing", {
     is: false,
@@ -47,6 +47,7 @@ export const schema = yup.object({
       yup
         .string()
         .required("Please enter the finish year")
+        .matches(/^\d{4}$/, "Year must be a valid number")
         .test(
           "is-after-start-date",
           "Finish date must be after start date",
