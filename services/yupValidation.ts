@@ -18,7 +18,7 @@ export const schema = yup.object({
   phone: yup
     .string()
     .required("Please enter a valid phone number")
-    .matches(/^\+61\s*\d{9}$/, "Must be an Australian number"),
+    .matches(/^\+61\s*\d{9}$/, "Must be an Australian number with 9 digits"),
 
   address: yup.string(),
 

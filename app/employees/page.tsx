@@ -41,12 +41,12 @@ export default function Employees() {
 
   return (
     <>
-      <header className="h-40 bg-slate-400 flex">
-        <h1 className="m-auto">Employees' List</h1>
+      <header className="h-40 bg-gray-50 flex">
+        <h1 className="m-auto text-3xl font-bold">Employees' List</h1>
       </header>
-      <section className="flex justify-center items-center my-10">
-        <p className="mr-4">
-          Please click on 'Edit' to find more details of each employee
+      <section className="flex justify-center flex-col sm:flex-row items-center my-10 mx-5">
+        <p className="mr-4 mb-2 text-center font-bold">
+          Please click on '<span className="font-bold">Edit</span>' to find more details of each employee
         </p>
         <Link href="/employees/add">
           <button className="bg-blue-700 p-3 rounded-lg text-white">
@@ -54,18 +54,20 @@ export default function Employees() {
           </button>
         </Link>
       </section>
-      {employeesList?.map((employee) => (
-        <EmployeeDisplay
-          key={employee.id}
-          id={employee.id}
-          firstName={employee.firstName}
-          lastName={employee.lastName}
-          status={employee.status}
-          email={employee.email}
-          startDate={employee.startDate}
-          onDelete={() => deleteDataHandler(employee.id)}
-        />
-      ))}
+      <section className="sm:mx-20 mx-10">
+        {employeesList?.map((employee) => (
+          <EmployeeDisplay
+            key={employee.id}
+            id={employee.id}
+            firstName={employee.firstName}
+            lastName={employee.lastName}
+            status={employee.status}
+            email={employee.email}
+            startDate={employee.startDate}
+            onDelete={() => deleteDataHandler(employee.id)}
+          />
+        ))}
+      </section>
     </>
   );
 }

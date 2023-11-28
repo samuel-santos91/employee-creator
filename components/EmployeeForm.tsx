@@ -7,7 +7,7 @@ import {
   UseFormHandleSubmit,
   UseFormSetValue,
   UseFormWatch,
-  FieldErrors
+  FieldErrors,
 } from "react-hook-form";
 
 interface EmployeeFormProps {
@@ -46,7 +46,6 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
   watch,
   errors,
 }) => {
-
   const isOngoing = watch("ongoing");
 
   useEffect(() => {
@@ -57,34 +56,42 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
     }
   }, [isOngoing, setValue]);
 
-  console.log(errors)
+  console.log(errors);
 
   return (
     <>
-      <header className="h-40 bg-slate-400 flex">
-        <Link className="hover:text-blue-600" href="/employees">
+      <header className="h-40 bg-gray-50 flex">
+        <Link
+          className="flex items-center absolute m-3 p-3 h-10 rounded-md bg-blue-700 text-white"
+          href="/employees"
+        >
           back
         </Link>
-        <h1 className="m-auto">Employee Details</h1>
+
+        <h1 className="m-auto text-3xl font-bold">Employee Details</h1>
       </header>
 
-      <form className="px-20" onSubmit={handleSubmit(onSubmit)}>
+      <form className="sm:mx-20 mx-10" onSubmit={handleSubmit(onSubmit)}>
         <section>
-          <h2 className="my-3 text-2xl">Personal Information</h2>
-          <div className="flex flex-col">
-            <label htmlFor="firstName">First Name</label>
+          <h2 className="mt-10 mb-3 text-xl font-bold">Personal Information</h2>
+          <div className="flex flex-col mb-3">
+            <label className="font-bold text-sm" htmlFor="firstName">
+              First Name
+            </label>
             <input
-              className="h-8 w-56 border-2 border-black rounded-md"
+              className="h-9 w-56 border-2 border-black rounded-md indent-2"
               type="text"
               id="firstName"
               {...register("firstName")}
             />
           </div>
 
-          <div className="flex flex-col">
-            <label htmlFor="middleName">Middle Name(If applicable)</label>
+          <div className="flex flex-col mb-3">
+            <label className="font-bold text-sm" htmlFor="middleName">
+              Middle Name(If applicable)
+            </label>
             <input
-              className="h-8 w-56 border-2 border-black rounded-md"
+              className="h-9 w-56 border-2 border-black rounded-md indent-2"
               type="text"
               id="middleName"
               {...register("middleName")}
@@ -92,9 +99,11 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
           </div>
 
           <div className="flex flex-col">
-            <label htmlFor="lastName">Last Name</label>
+            <label className="font-bold text-sm" htmlFor="lastName">
+              Last Name
+            </label>
             <input
-              className="h-8 w-56 border-2 border-black rounded-md"
+              className="h-9 w-56 border-2 border-black rounded-md indent-2"
               type="text"
               id="lastName"
               {...register("lastName")}
@@ -103,68 +112,85 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
         </section>
 
         <section>
-          <h2 className="my-3 text-2xl">Contact Details</h2>
-          <div className="flex flex-col">
-            <label htmlFor="email">Email Address</label>
+          <h2 className="mt-10 mb-3 text-xl font-bold">Contact Details</h2>
+          <div className="flex flex-col mb-3">
+            <label className="font-bold text-sm" htmlFor="email">
+              Email Address
+            </label>
             <input
-              className="h-8 w-56 border-2 border-black rounded-md"
+              className="h-9 w-64 border-2 border-black rounded-md indent-2"
               type="email"
               id="email"
               {...register("email")}
             />
           </div>
 
-          <div className="flex flex-col">
-            <label htmlFor="phone">Mobile Number</label>
+          <div className="flex flex-col mb-3">
+            <label className="font-bold text-sm" htmlFor="phone">
+              Mobile Number
+            </label>
             <input
-              className="h-8 w-56 border-2 border-black rounded-md"
+              className="h-9 w-56 border-2 border-black rounded-md indent-1"
               type="text"
               id="phone"
+              defaultValue="+61"
               {...register("phone")}
             />
           </div>
 
-          <div className="flex flex-col">
-            <label htmlFor="address">Residential Address</label>
+          <div className="flex flex-col mb-3">
+            <label className="font-bold text-sm" htmlFor="address">
+              Residential Address
+            </label>
             <input
-              className="h-8 w-56 border-2 border-black rounded-md"
+              className="h-9 w-10/12 sm:w-96 border-2 border-black rounded-md indent-2"
               type="text"
               id="address"
               {...register("address")}
             />
           </div>
         </section>
+
         <section>
-          <h2 className="my-3 text-2xl">Employee Status</h2>
-          <div className="flex flex-col">
-            <p className="font-bold mt-2">Contract Type</p>
-            <div>
+          <h2 className="mt-10 mb-3 text-xl font-bold">Employee Status</h2>
+
+          <label className="font-bold mt-2 text-sm">Contract Type</label>
+          <section className="flex mt-2 mb-7">
+            <div className="flex items-center">
               <input
+                className="h-7 w-7 mr-2"
                 type="radio"
                 value="permanent"
                 id="permanent"
                 {...register("status")}
               />
-              <label htmlFor="permanent">Permanent</label>
+              <label className="text-sm mr-2" htmlFor="permanent">
+                Permanent
+              </label>
             </div>
 
-            <div>
+            <div className="flex items-center">
               <input
+                className="h-7 w-7 mr-2"
                 type="radio"
                 value="contract"
                 id="contract"
                 {...register("status")}
               />
-              <label htmlFor="contract">Contract</label>
+              <label className="text-sm" htmlFor="contract">
+                Contract
+              </label>
             </div>
-          </div>
+          </section>
 
-          <p className="font-bold mt-2">Start Date</p>
-          <section className="flex">
+          <label className="font-bold text-sm mb-2">Start Date</label>
+          <section className="flex mb-2">
             <div className="mr-2 flex flex-col">
-              <label htmlFor="dayStart">Day</label>
+              <label className="text-sm" htmlFor="dayStart">
+                Day
+              </label>
               <input
-                className="h-8 w-16 border-2 border-black rounded-md"
+                className="h-9 w-16 border-2 border-black rounded-md indent-2"
                 type="number"
                 id="dayStart"
                 {...register("dayStart")}
@@ -172,9 +198,11 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
             </div>
 
             <div className="mr-2 flex flex-col">
-              <label htmlFor="monthStart">Month</label>
+              <label className="text-sm" htmlFor="monthStart">
+                Month
+              </label>
               <select
-                className="h-8 w-36 border-2 border-black rounded-md"
+                className="h-9 w-36 border-2 border-black rounded-md"
                 id="monthStart"
                 {...register("monthStart")}
               >
@@ -195,9 +223,11 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
             </div>
 
             <div className="flex flex-col">
-              <label htmlFor="yearStart">Year</label>
+              <label className="text-sm" htmlFor="yearStart">
+                Year
+              </label>
               <input
-                className="h-8 w-16 border-2 border-black rounded-md"
+                className="h-9 w-16 border-2 border-black rounded-md indent-2"
                 type="number"
                 id="yearStart"
                 {...register("yearStart")}
@@ -205,12 +235,14 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
             </div>
           </section>
 
-          <p className="font-bold mt-2">Finish Date</p>
+          <label className="text-sm font-bold mb-2">Finish Date</label>
           <section className="flex">
             <div className="mr-2 flex flex-col">
-              <label htmlFor="dayEnd">Day</label>
+              <label className="text-sm" htmlFor="dayEnd">
+                Day
+              </label>
               <input
-                className="h-8 w-16 border-2 border-black rounded-md"
+                className="h-9 w-16 border-2 border-black rounded-md indent-2"
                 type="number"
                 id="dayEnd"
                 {...register("dayEnd")}
@@ -218,9 +250,11 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
             </div>
 
             <div className="mr-2 flex flex-col">
-              <label htmlFor="monthEnd">Month</label>
+              <label className="text-sm" htmlFor="monthEnd">
+                Month
+              </label>
               <select
-                className="h-8 w-36 border-2 border-black rounded-md"
+                className="h-9 w-36 border-2 border-black rounded-md"
                 id="monthEnd"
                 {...register("monthEnd")}
               >
@@ -241,9 +275,11 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
             </div>
 
             <div className="flex flex-col">
-              <label htmlFor="yearEnd">Year</label>
+              <label className="text-sm" htmlFor="yearEnd">
+                Year
+              </label>
               <input
-                className="h-8 w-16 border-2 border-black rounded-md"
+                className="h-9 w-16 border-2 border-black rounded-md indent-2"
                 type="number"
                 id="yearEnd"
                 {...register("yearEnd")}
@@ -251,53 +287,70 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
             </div>
           </section>
 
-          <div className="my-2">
-            <input type="checkbox" id="ongoing" {...register("ongoing")} />
-            <label className="mx-2" htmlFor="ongoing">
+          <section className="mt-4 mb-7 flex items-center">
+            <input
+              className="w-6 h-6"
+              type="checkbox"
+              id="ongoing"
+              {...register("ongoing")}
+            />
+            <label className="mx-2 text-sm" htmlFor="ongoing">
               On going
             </label>
-          </div>
+          </section>
 
-          <div className="flex flex-col">
-            <p className="font-bold mt-2">Full-time or part-time basis?</p>
-            <div>
+          <label className="font-bold text-sm">
+            Full-time or part-time basis?
+          </label>
+          <section className="flex mb-7">
+            <div className="mt-2 flex items-center">
               <input
+                className="w-7 h-7 mr-2"
                 type="radio"
                 value="full-time"
                 id="fullTime"
                 {...register("type")}
               />
-              <label htmlFor="fullTime">Full-time</label>
+              <label className="mr-2 text-sm" htmlFor="fullTime">
+                Full-time
+              </label>
             </div>
 
-            <div>
+            <div className="mt-2 flex items-center">
               <input
+                className="w-7 h-7 mr-2"
                 type="radio"
                 value="part-time"
                 id="partTime"
                 {...register("type")}
               />
-              <label htmlFor="partTime">Part-time</label>
+              <label className="text-sm" htmlFor="partTime">
+                Part-time
+              </label>
             </div>
-          </div>
+          </section>
 
-          <div className="flex flex-col">
-            <label className="font-bold mt-2" htmlFor="hours">
+          <section className="flex flex-col">
+            <label className="font-bold text-sm" htmlFor="hours">
               Hours Per Week
             </label>
             <input
-              className="h-8 w-56 border-2 border-black rounded-md"
+              className="h-9 w-24 border-2 border-black rounded-md indent-2"
               type="number"
               id="hours"
               {...register("hoursPerWeek")}
             />
-          </div>
+          </section>
         </section>
 
-        <section className="flex justify-center">
-          <button className="m-2 p-3 w-28 bg-blue-600 text-white">Save</button>
+        <section className="flex justify-center my-6">
+          <button className="m-2 p-3 w-28 rounded-md bg-blue-700 text-white">
+            Save
+          </button>
           <Link href="/employees">
-            <button className="m-2 p-3 w-28 bg-slate-300">Cancel</button>
+            <button className="m-2 p-3 w-28 rounded-md bg-slate-300">
+              Cancel
+            </button>
           </Link>
         </section>
       </form>

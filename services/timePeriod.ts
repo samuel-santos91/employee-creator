@@ -13,7 +13,7 @@ export const timePeriod = (start: string) => {
     return `${monthPeriod} month(s)`;
   } else {
     if (yearPeriod < 0) {
-      return `Starts in ${startDate.getFullYear()}`;
+      return `starts in ${startDate.getFullYear()}`;
     }
     return `${yearPeriod} year(s)`;
   }
