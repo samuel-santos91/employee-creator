@@ -1,10 +1,21 @@
-export const timePeriod = (start: string) => {
+export const timePeriod = (start: string, end: string) => {
   const startDate = new Date(start);
+  const finishDate = new Date(end);
   const currentDate = new Date();
 
-  const yearPeriod = currentDate.getFullYear() - startDate.getFullYear();
-  const monthPeriod = currentDate.getMonth() - startDate.getMonth();
-  const dayPeriod = currentDate.getDate() - startDate.getDate();
+  let yearPeriod = null;
+  let monthPeriod = null;
+  let dayPeriod = null;
+
+  if (finishDate < currentDate && end !== null) {
+    yearPeriod = finishDate.getFullYear() - startDate.getFullYear();
+    monthPeriod = finishDate.getMonth() - startDate.getMonth();
+    dayPeriod = finishDate.getDate() - startDate.getDate();
+  } else {
+    yearPeriod = currentDate.getFullYear() - startDate.getFullYear();
+    monthPeriod = currentDate.getMonth() - startDate.getMonth();
+    dayPeriod = currentDate.getDate() - startDate.getDate();
+  }
 
   if (yearPeriod === 0) {
     if (monthPeriod === 0) {

@@ -15,7 +15,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-[url('../public/bg-img.jpg')] bg-contain bg-no-repeat bg-center bg-fixed h-screen">
-        <div className="fixed top-0 left-0 w-full h-screen bg-black opacity-30 -z-10"></div>
         {children}
       </body>
     </html>

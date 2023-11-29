@@ -56,8 +56,6 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
     }
   }, [isOngoing, setValue]);
 
-  console.log(errors);
-
   return (
     <>
       <header className="h-40 bg-gray-50 flex">

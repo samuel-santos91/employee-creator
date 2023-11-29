@@ -13,6 +13,7 @@ interface Employee {
   status: string;
   email: string;
   startDate: string;
+  finishDate: string;
 }
 
 export default function Employees() {
@@ -44,7 +45,7 @@ export default function Employees() {
       <header className="mb-10 h-40 bg-gray-50 flex flex-col justify-center">
         <h1 className="mb-3 text-center text-3xl font-bold">Employees' List</h1>
 
-        <div className="flex justify-center flex-col sm:flex-row items-center">
+        <div className="flex justify-center flex-col sm:flex-row items-center text-sm">
           <p className="mr-4 text-center">
             Please click on '<span className="font-bold">Edit</span>' to find
             more details of each employee
@@ -68,6 +69,7 @@ export default function Employees() {
             status={employee.status}
             email={employee.email}
             startDate={employee.startDate}
+            finishDate={employee.finishDate}
             onDelete={() => deleteDataHandler(employee.id)}
           />
         ))}

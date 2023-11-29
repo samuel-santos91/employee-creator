@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <header className={openSans.className}>
-        <div className="m-auto relative top-56 w-10/12 p-6 rounded-full bg-gray-50">
+        <div className="m-auto relative top-56 w-10/12 p-6 rounded-full bg-gray-50 border-solid border-2 border-gray-200">
           <h1 className="lg:text-5xl text-4xl font-bold text-center">
             Employee Management
           </h1>
