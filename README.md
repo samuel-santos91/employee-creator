@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# employee-creator
 
-## Getting Started
+## Description
+This application is used to manage employee's information.
+### Purpose
+* The purpose of this project was:
+    * to build a full-stack application to apply my knowledges in Spring and Next.js
+    * to practise RESTfull API  
+### Tech Stack
+#### FRONTEND
+* Next.js
+* TypeScript
+* Tailwind CSS
+#### BACKEND
+* Spring Boot
+#### DATABASE
+* MySQL
 
-First, run the development server:
+## Preview
+### Landing page <br>
+<img width="500" alt="Screenshot 2023-11-29 at 19 32 18" src="https://github.com/samuel-santos91/employee-creator/assets/107240729/a68a79c4-078f-4d3b-9baf-1009e9cb004b">
+
+### List of employees <br>
+<img width="500" alt="Screenshot 2023-11-29 at 19 33 21" src="https://github.com/samuel-santos91/employee-creator/assets/107240729/1543ba8a-16e4-4d54-94ef-52a178a91e64">
+
+### Form to add or edit employees informations <br>
+<img width="500" alt="Screenshot 2023-11-29 at 19 34 34" src="https://github.com/samuel-santos91/employee-creator/assets/107240729/75133636-c3a1-416f-a18c-d85b975a69bb">
+
+## About
+### Sections
+* There are 3 different sections in this app:
+  * Landing page
+  * Employee's list page
+  * Edit/create employee page
+### Features
+* On the listing page you will have 3 options:
+  * Add
+  * Edit
+  * Remove
+* When adding or editing an employee's information, you can fill out all the forms than click on the save button
+* All the employee are saved in a <strong>MySQL</strong> database
+
+## React-Hook-Form
+This application uses <strong>react-hook-form</strong>
+* All data from the form fields are saved and sent to the server via <strong>react-hook-form</strong>
+* It also uses <strong>Yup</strong> to handle all the form's validation
+  
+## Backend repository
+Refer to [https://github.com/samuel-santos91/pet-sitting-services-app-backend](https://github.com/samuel-santos91/employee-creator-server)
+
+## Prerequisites
+
+### Install Node JS
+Refer to https://nodejs.org/en/
+
+### Install MySQL
+Refer to https://dev.mysql.com/downloads/installer/
+
+## Cloning and Running the Application in local
+
+Clone the project into local
+
+Install all the npm packages. Go into the project folder and type the following command to install all npm packages
+
+```bash
+npm install
+```
+
+In order to run the application Type the following command
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The frontend runs on **localhost:3000** <br>
+The backend runs on **localhost:8080** 
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Change Logs
+### 20/11/2023 to 22/11/2023 - {Creation of the backend with Spring Boot}
+* Creates service, repository and controller layers
+* Creates entity and DTO
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### 23/11/2023 to 25/11/2023 - {Creation of the frontend with Next.js}
+* Adds service file with all the API functions
+* Creates form with react-hook-form
 
-## Learn More
+### 26/11/2023 to 29/11/2023 - {Form validation and styling}
+* Edit createDTO file in the backend
+* Creates Yup validation schema
+* Sets up form error messages
 
-To learn more about Next.js, take a look at the following resources:
+## Future Goals
+* Write tests for both frontend and backend
+* Deploy the application using AWS
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
