@@ -89,7 +89,9 @@ The backend runs on **localhost:8080**
 * Creates Yup validation schema
 * Sets up form error messages
 
+### 04/12/2023 to 04/12/2023 - {Backend unit tests}
+
 ## Future Goals
-* Write tests for both frontend and backend
+* Write tests for frontend
 * Deploy the application using AWS
 
