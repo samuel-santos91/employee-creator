@@ -25,7 +25,7 @@ interface EmployeeData {
 }
 
 const api = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: "https://employee-creator-server.onrender.com",
 });
 
 export const getEmployees = async (): Promise<EmployeeDataMain[]> => {
