@@ -50,6 +50,8 @@ export default function EmployeeId({ params }: any) {
 
   useEffect(() => {
     fetchData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {

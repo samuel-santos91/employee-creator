@@ -38,16 +38,18 @@ export default function Employees() {
 
   useEffect(() => {
     fetchData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
       <header className="mb-10 h-40 bg-gray-50 flex flex-col justify-center">
-        <h1 className="mb-3 text-center text-3xl font-bold">Employees' List</h1>
+        <h1 className="mb-3 text-center text-3xl font-bold">Employees&#39; List</h1>
 
         <div className="flex justify-center flex-col sm:flex-row items-center text-sm">
           <p className="mr-4 text-center">
-            Please click on '<span className="font-bold">Edit</span>' to find
+            Please click on &#39;<span className="font-bold">Edit</span>&#39; to find
             more details of each employee
           </p>
 
