@@ -90,6 +90,8 @@ The backend runs on **localhost:8080**
 * Sets up form error messages
 
 ## Future Goals
+* Modals to inform when employee was added/edited
+* Method to check if employee added already exists in database
 * Write tests for both frontend and backend
 * Deploy the application using AWS
 
