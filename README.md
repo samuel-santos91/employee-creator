@@ -1,5 +1,7 @@
 # employee-creator
 
+## Live Version
+Link: https://employee-creator.vercel.app/
 ## Description
 This application is used to manage employee's information.
 ### Purpose
