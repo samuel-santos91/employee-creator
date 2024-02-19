@@ -27,12 +27,15 @@ export default function Employees() {
     await getEmployees()
       .then((res) => {
         setLoading(false);
+
         setEmployeesList(res);
       })
       .catch((e) => console.log(e));
   };
 
   const deleteDataHandler = async (id: number) => {
+    setLoading(true);
+
     await deleteEmployee(id)
       .then((res) => {
         fetchData();
@@ -84,7 +87,7 @@ export default function Employees() {
         ))}
       </section>
 
-      <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2">
+      <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 z-50">
         <PulseLoader loading={loading} />
       </span>
     </>

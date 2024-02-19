@@ -79,16 +79,20 @@ export default function EmployeeId({ params }: any) {
 
   return (
     <>
-      <EmployeeForm
-        register={register}
-        onSubmit={onSubmit}
-        handleSubmit={handleSubmit}
-        setValue={setValue}
-        watch={watch}
-        errors={errors}
-      />
-
-      <PulseLoader loading={loading} />
+      {!loading ? (
+        <EmployeeForm
+          register={register}
+          onSubmit={onSubmit}
+          handleSubmit={handleSubmit}
+          setValue={setValue}
+          watch={watch}
+          errors={errors}
+        />
+      ) : (
+        <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2">
+          <PulseLoader loading={loading} />
+        </span>
+      )}
     </>
   );
 }

@@ -1,6 +1,8 @@
 import { useRouter } from "next/navigation";
+import { PulseLoader } from "react-spinners";
 
 import { timePeriod } from "@/services/timePeriod";
+import { Dispatch, SetStateAction } from "react";
 interface EmployeeDisplayProps {
   id: number;
   firstName: string;
@@ -13,7 +15,16 @@ interface EmployeeDisplayProps {
 }
 
 const EmployeeDisplay: React.FC<EmployeeDisplayProps> = (props) => {
-  const { id, firstName, lastName, status, email, startDate, finishDate, onDelete } = props;
+  const {
+    id,
+    firstName,
+    lastName,
+    status,
+    email,
+    startDate,
+    finishDate,
+    onDelete,
+  } = props;
   const router = useRouter();
 
   const timeAtTheCompany = timePeriod(startDate, finishDate);
