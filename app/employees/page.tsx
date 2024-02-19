@@ -84,7 +84,9 @@ export default function Employees() {
         ))}
       </section>
 
-      <PulseLoader loading={loading} />
+      <span className="relative top-1/2 text-center">
+        <PulseLoader loading={loading} />
+      </span>
     </>
   );
 }
